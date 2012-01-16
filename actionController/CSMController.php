@@ -29,20 +29,21 @@ if (array_key_exists('action', $_POST) && $_POST['action'] != null)
 else
 	if (array_key_exists('action', $_GET) && $_GET['action'] != null)
 		$action = $_GET['action'];
+		
 if ($action != "userAuthetication") {
         $venueService = new VenueService();
         if(!$venueService->isSessionExist()){
         	$message = "Session Expired";
-        	require_once ("../view/loginform.php");
+        	require_once ("../view/cms/loginform.php");
         }
 }
 
 if ($action == "loadEditForm") {
         $venueService = new VenueService();
 		$venueList = $venueService->getVenue();
-       	require_once ("../view/VenueEditForm.php");
+       	require_once ("../view/cms/editVenue.php");
 }
-if ($action == "deleteVenue") {
+if ($action == "deleteVenue") { 
         $venueService = new VenueService();
 		$databaseResponse = $venueService->deleteVenue();
 		$message = "";
@@ -78,23 +79,18 @@ if ($action == "insertVenue") {
 }
 
 if ($action == "userAuthetication") {
+     
      $venueService = new VenueService();
      $status = $venueService->isValidUser();
-     $message = "";
-     
-     $sessionId = $venueService->getSesstionId();
-
      if(!$status){
      	$message = "Authentication Failed";
-     	require_once ("../view/loginform.php");
-     }
-     else{
+     	require_once ("../view/cms/loginform.php");
+     }else{
+     	$sessionId = $venueService->getSessionId();
      	$venueService->setCookie($sessionId);
      	$venueList = $venueService->searchVenueViaPostCall();
-		$databaseResponse = "";
-     	require_once ("../view/venue.php");
-     }
-     	
+     	require_once ("../view/cms/venueList.php");
+     }     	
 }
 
 if ($action == "logout") {
@@ -106,8 +102,4 @@ if ($action == "logout") {
      $message = "Successfully Logout";
      require_once ("../view/loginform.php");
 }
-//ahalbjeu49e7qbt11eaca55ev0
-//ahalbjeu49e7qbt11eaca55ev0
-//ahalbjeu49e7qbt11eaca55ev0
-//ahalbjeu49e7qbt11eaca55ev0
 ?>
