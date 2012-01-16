@@ -11,7 +11,9 @@ else
 
 if ($action == "searchVenue") {
 	$venueService = new VenueService();
-	$venueList = $venueService->searchVenue();
+	//$venueList = $venueService->searchVenue();
+	$venueList = $venueService->searchVenueForPagination();
+	
 	$regionName = $venueService->getRegion();
 	$categoryName = $venueService->getCategory();
 	$capacityValue = $venueService->getCapacity();
