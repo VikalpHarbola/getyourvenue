@@ -42,7 +42,7 @@ class VenueService {
 		$regionType = $_GET['region'];
 		$categoryType = $_GET['category'];
 		$capacityId = $_GET['capacity'];
-		$page = $_GET['page'];
+		$page = 1;//$_GET['page'];
 		$startIndex=0;
 		$offset=10;
 		$startIndex=($page-1)*$offset+$startIndex;
@@ -53,7 +53,7 @@ class VenueService {
 		$categoryId = $getYourVenueMySQLManager->getVenueTypeIdByVenueType($categoryType);
 		if($categoryId=="")
 			$categoryId=-1;
-		return $getYourVenueMySQLManager->getVenues($regionId, $categoryId, $capacityId,$startIndex,$offset);
+		return $getYourVenueMySQLManager->getVenuesforPagination($regionId, $categoryId, $capacityId,$startIndex,$offset);
 
 	} //function
 
@@ -197,6 +197,7 @@ class VenueService {
     	$venue = new Venue();
 		$venue->venueId = $_POST['venueid'];
 		$venue->id = $_POST['id'];
+		$venue->rank = $_POST['rank'];
 		$venue->venueName = $_POST['name'];
 		$venue->venueAddr1 = $_POST['address1'];
 		$venue->venueAddr2 = $_POST['address2'];
@@ -355,7 +356,7 @@ class VenueService {
 			return false;
 	}//function
 	
-	function getSesstionId(){
+	function getSessionId(){
 		
 		$sessionId = session_id();
 		if(empty($sessionId)){
