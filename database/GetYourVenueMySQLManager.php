@@ -105,6 +105,7 @@ class GetYourVenueMySQLManager {
 				$venue = new Venue();
 				$venue->id = $row['id'];
 				$venue->venueId = $row['venueid'];
+				$venue->rank = $row['rank'];
 				$venue->venueName = $row['name'];
 				$venue->venueAddr1 = $row['address1'];
 				$venue->venueAddr2 = $row['address2'];
