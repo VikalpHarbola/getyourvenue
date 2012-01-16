@@ -15,6 +15,7 @@ class Venue {
 	var $id;
 	var $venueId;
 	var $venueName;
+	var $rank;
 	var $venueAddr1;
 	var $venueAddr2;
 	var $content;
@@ -41,6 +42,15 @@ class Venue {
 		$this->venueName = $venueName;
 	}
 	
+	public function getRank() {
+
+		return $this->rank;
+	}
+
+	public function setRank($rank) {
+
+		$this->rank = $rank;
+	}
 	
 	public function getVenueAddr1() {
 
