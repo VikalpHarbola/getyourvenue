@@ -9,13 +9,23 @@ RewriteRule ^contact_us$   /view/contact_us.php [L]
 RewriteRule ^non_wedding$   /view/non_wedding.php [L]
 RewriteRule ^allied-services$   /view/allied-services.php [L]
 RewriteRule ^search_results$   /actionController/Controller.php [L]
+RewriteRule ^search_results_pagination$   /actionController/Controller.php [L]
 RewriteRule ^readers-corner$   /view/readers-corner.php [L]
 RewriteRule ^site-map$   /view/site-map.php [L]
 
 RewriteCond %{HTTP_HOST} ^www\.getyourvenue\.com [NC]
 RewriteRule ^(.*)$ http://getyourvenue.com/$1 [L,R=301]
 
+RewriteRule ^venues/(.*)/(.*)/(.*)/(.*)$   /search_results_pagination?region=$1&category=$2&capacity=$3&page=$4&action=searchVenue [L]
 RewriteRule ^venues/(.*)/(.*)/(.*)$   /search_results?region=$1&category=$2&capacity=$3&action=searchVenue [L]
+RewriteRule ^wedding-venues-in-chhatarpur/(.*)$ /search_results?option=1&page=$1&action=viewChoices [L]
+RewriteRule ^wedding-venues-in-mundka/(.*)$ /search_results?option=2&page=$1&action=viewChoices [L]
+RewriteRule ^wedding-venues-in-gt-karnal-road/(.*)$ /search_results?option=3&page=$1&action=viewChoices [L]
+RewriteRule ^wedding-venues-in-NH8-Pushpanjali/(.*)$ /search_results?option=4&page=$1&action=viewChoices [L]
+RewriteRule ^wedding-venues-in-Vaishali-Vasundhara/(.*)$ /search_results?option=5&page=$1&action=viewChoices [L]
+RewriteRule ^wedding-venues-in-delhi-NCR/(.*)$ /search_results?action=viewChoices&page=$1 [L]
+
+
 RewriteRule ^wedding-venues-in-chhatarpur$ /search_results?option=1&action=viewChoices [L]
 RewriteRule ^wedding-venues-in-mundka$ /search_results?option=2&action=viewChoices [L]
 RewriteRule ^wedding-venues-in-gt-karnal-road$ /search_results?option=3&action=viewChoices [L]
