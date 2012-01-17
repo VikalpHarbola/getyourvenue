@@ -15,36 +15,25 @@ class VenueService {
 
 	function searchVenue() {
 
-		//$regionInfo = explode(",_id:", $_POST['region']); //TODO hard code
 		$regionType = $_GET['region'];
-
-		//$categoryInfo = explode(",_id:", $_POST['category']); //TODO hard code
 		$categoryType = $_GET['category'];
-
-		//$capacityInfo = explode(",_id:", $_POST['capacity']); //TODO hard code
 		$capacityId = $_GET['capacity'];
-
-		//$pagePointer = $_POST['pagePointer'];TODO
 		$getYourVenueMySQLManager = new GetYourVenueMySQLManager();
 		$regionId = $getYourVenueMySQLManager->getRegionIdByRegionType($regionType);
-		if($regionId=="")
-			$regionId=-1;
+		if($regionId=="") $regionId=-1;
 		$categoryId = $getYourVenueMySQLManager->getVenueTypeIdByVenueType($categoryType);
-		if($categoryId=="")
-			$categoryId=-1;
-		//echo "++++++++++++".$regionId."------------".$categoryId;
+		if($categoryId=="")	$categoryId=-1;
 		return $getYourVenueMySQLManager->getVenues($regionId, $categoryId, $capacityId);
 
 	} //function
 	
-	function searchVenueForPagination() {
+	function searchVenueForPagination($page) {
 
 		$regionType = $_GET['region'];
 		$categoryType = $_GET['category'];
 		$capacityId = $_GET['capacity'];
-		$page = 1;//$_GET['page'];
-		$startIndex=0;
 		$offset=10;
+		$startIndex=0;
 		$startIndex=($page-1)*$offset+$startIndex;
 		$getYourVenueMySQLManager = new GetYourVenueMySQLManager();
 		$regionId = $getYourVenueMySQLManager->getRegionIdByRegionType($regionType);
@@ -79,8 +68,25 @@ class VenueService {
 			$choiceId = $_GET['option'];
 		else
 			$choiceId = 0; //TODO (hard code choiceId)
+		
 		$getYourVenueMySQLManager = new GetYourVenueMySQLManager();
 		return $getYourVenueMySQLManager->getVenueByChoice($choiceId);
+
+	} // function getVenueByChoice
+	
+	function getVenueByChoiceForPagination($page) {
+
+		if (array_key_exists('option', $_GET) && $_GET['option'] != null)
+			$choiceId = $_GET['option'];
+		else
+			$choiceId = 0; //TODO (hard code choiceId)
+		
+		$offset=10;
+		$startIndex=0;
+		$startIndex=($page-1)*$offset+$startIndex;
+			
+		$getYourVenueMySQLManager = new GetYourVenueMySQLManager();
+		return $getYourVenueMySQLManager->getVenueByChoiceForPagination($choiceId,$startIndex,$offset);
 
 	} // function getVenueByChoice
 	
