@@ -240,6 +240,47 @@ class GetYourVenueMySQLManager {
 										 WHERE ve.popular_choice!=1 AND ve.popular_choice!=2 AND ve.popular_choice!=3 AND 
 										 ve.popular_choice!=4 AND ve.popular_choice!=5";  
 			$result = mysql_query($query);
+			
+			echo $query;
+			while ($row = mysql_fetch_array($result)) {
+
+				$venue = new Venue();
+				$venue->id = $row['id'];
+				$venue->venueId = $row['venueid'];
+				$venue->venueName = $row['name'];
+				$venue->venueAddr1 = $row['address1'];
+				$venue->venueAddr2 = $row['address2'];
+				$venue->content = $row['content'];
+				$venueList[] = $venue;
+			}
+		}
+
+		mysql_close($connection);
+		return $venueList;
+
+	}
+
+
+	function getVenueByChoiceForPagination($choiceId,$startIndex,$offset) {
+
+		$dbConstants = new DBConstants();
+		$dBUtils = new DBUtils();
+		$connection = $dBUtils->getDBConnection();
+		$venueList = array ();
+
+		$dataBaseResponse = "";
+
+		if (!(mysql_select_db($dbConstants->DATABASE, $connection))) {
+			throw new DBSourceException("Unable to connect to a datasource.");
+		} else {
+			if ($choiceId != 0) //TODO (hard code choiceId)
+				$query = "SELECT ve.name,ve.address1,ve.address2,ve.content,ve.id,ve.venueid FROM venue ve WHERE 
+									      ve.popular_choice=" . $choiceId." limit ".$startIndex.",".$offset ;
+			else
+				$query = "SELECT ve.name,ve.address1,ve.address2,ve.content,ve.id,ve.venueid FROM venue ve
+										 WHERE ve.popular_choice!=1 AND ve.popular_choice!=2 AND ve.popular_choice!=3 AND 
+										 ve.popular_choice!=4 AND ve.popular_choice!=5 limit ".$startIndex.",".$offset;  
+			$result = mysql_query($query);
 			while ($row = mysql_fetch_array($result)) {
 
 				$venue = new Venue();
