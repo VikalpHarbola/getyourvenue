@@ -10,6 +10,7 @@ echo $venueService->getSEOConstant($action,"");
 <link rel="stylesheet" type="text/css" href="/css/style.css" />
 <script type="text/javascript" src="/js/jquery-1.6.1.min.js"></script>
 <script type="text/javascript" src="/js/jquery.nivo.slider.pack.js"></script>
+<script type="text/javascript" src="/js/GYKUtils.js"></script>
 </head>
 <body>
 
@@ -61,14 +62,6 @@ echo $venueService->getSEOConstant($action,"");
             <div class="boxContent">
               <div class="boxGr" align="center">
                 <!-- Box Content Start -->
-                <script type="text/javascript"><!--
-google_ad_client = "ca-pub-4918915311035756";
-/* Side Panels */
-google_ad_slot = "6847862507";
-google_ad_width = 120;
-google_ad_height = 600;
-//-->
-</script>
 <script type="text/javascript"
 src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 </script>
@@ -179,6 +172,50 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 			</div>
 			</div>	
 	<?php }	?>	
+	
+	 	<!-- Box Start -->
+        <div class="box">
+          <div class="boxtop2"><img src="/images/boxTop2L.png" align="left" alt="" /><img src="/images/boxTop2R.png" align="right" alt="" />
+            <div class="boxtopbg"></div>
+          </div>
+          <div class="fullboxBg">
+            <div class="boxContent">
+              <div class="boxGr2">
+                <!-- Box Content Start -->
+                <?php if(($page-1)>0) {?>
+                	<a href="javascript:void(0);" onclick="return redirectToHostPagination('<?php echo $constants->DOMAIN_URL?>','<?php echo $page-1?>','<?php echo $fromPage ?>');" class="prev-Btn f-left">Prev</a>
+                 <?php } ?>
+                <?php if(($page+1)<$maxPages) {?> 
+                	<a href="javascript:void(0);" onclick="return redirectToHostPagination('<?php echo $constants->DOMAIN_URL?>','<?php echo $page+1?>','<?php echo $fromPage ?>');" class="next-Btn f-right">Next</a>
+                <?php } ?>
+                <div class="pagi">
+	                	 <?php if(($page-2)>0){?>
+	                	   <a href="javascript:void(0);" onclick="return redirectToHostPagination('<?php echo $constants->DOMAIN_URL?>','<?php echo $page-2?>','<?php echo $fromPage ?>');" ><?php echo $page-2?></a> 
+	                	 <?php } ?>
+	                	 <?php if(($page-1)>0) {?>
+	                	   <a href="javascript:void(0);" onclick="return redirectToHostPagination('<?php echo $constants->DOMAIN_URL?>','<?php echo $page-1?>','<?php echo $fromPage ?>');" ><?php echo $page-1?></a> 
+	                	  <?php } ?>
+	                	 <span class="current">[ <?php echo ($page) ?> ]</span> 
+	                	 <?php if(($page+1)<=$maxPages){?>
+	                	   <a href="javascript:void(0);" onclick="return redirectToHostPagination('<?php echo $constants->DOMAIN_URL?>','<?php echo $page+1?>','<?php echo $fromPage ?>');" ><?php echo $page+1?></a> 
+	                	 <?php } ?>
+	                	 <?php if(($page+2)<=$maxPages) {?>
+	                	   <a href="javascript:void(0);" onclick="return redirectToHostPagination('<?php echo $constants->DOMAIN_URL?>','<?php echo $page+2?>','<?php echo $fromPage ?>');" ><?php echo $page+2?></a> 
+	                	 <?php } ?>	
+	                	<?php if(($page+2)<=$maxPages) {?>
+	                	   ...  
+	                	<?php } ?>	
+                 </div> 
+                	
+                <!-- Box Content End -->
+              </div>
+            </div>
+          </div>
+          <div class="boxbot2"><img src="/images/boxBot2L.png" align="left" alt="" /><img src="/images/boxBot2R.png" align="right" alt="" />
+            <div class="boxbotbg"></div>
+          </div>
+        </div>
+        <!-- Box End -->
 	
       </div>
       <div id="rightNavNarrow">
