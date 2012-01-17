@@ -10,26 +10,30 @@ else
 		$action = $_GET['action'];
 
 if ($action == "searchVenue") {
-	$venueService = new VenueService();
-	//$venueList = $venueService->searchVenue();
-	$venueList = $venueService->searchVenueForPagination();
 	
+	$page=1;
+	if(array_key_exists('page', $_GET) && $_GET['page']!=null) {
+	 $page = $_GET['page'];
+	}	
+	$venueService = new VenueService();
+	$venueList = $venueService->searchVenueForPagination($page);
 	$regionName = $venueService->getRegion();
 	$categoryName = $venueService->getCategory();
 	$capacityValue = $venueService->getCapacity();
-	//$totalCount = $venueService->geTotalDataCount();TODO
+	
+	$tmpVenueList=$venueService->searchVenue();
+	$maxPages=ceil(count($tmpVenueList)/10);
+	
+	$fromPage="FILTER_SEARCH";
 	require_once ("../view/searchresults.php");
 }
 
-/*if ($action == "bookVenue") {
-	$venueService = new VenueService();
-	$response = $venueService->bookVenue();
-
-}*/
-
 if ($action == "viewChoices") {
-	$venueService = new VenueService();
-	$venueList = $venueService->getVenueByChoice();
+	
+	$page=1;
+	if(array_key_exists('page', $_GET) && $_GET['page']!=null) {
+	 $page = $_GET['page'];
+	}
 	if (array_key_exists('option', $_GET) && $_GET['option'] != null) {
 		$choiceId = $_GET['option'];
 		if ($choiceId == 1)
@@ -44,10 +48,17 @@ if ($action == "viewChoices") {
 			$regionName = "Vaishali Extn. and Vasundhara";
 	} else {
 		$regionName = "Others";
+		$choiceId=0;
 	}
-
+	
+	$venueService = new VenueService();
+	$venueList = $venueService->getVenueByChoice();	
+	$maxPages=ceil(count($venueList)/10);
+	echo "max Page".$maxPages;
+	$venueList = $venueService->getVenueByChoiceForPagination($page);	
 	$categoryName = "";
 	$capacityValue = "";
+	$fromPage=$choiceId;
 	require_once ("../view/searchresults.php");
 }
 
