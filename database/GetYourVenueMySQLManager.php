@@ -234,7 +234,7 @@ class GetYourVenueMySQLManager {
 		} else {
 			if ($choiceId != 0) //TODO (hard code choiceId)
 				$query = "SELECT ve.name,ve.address1,ve.address2,ve.content,ve.id,ve.venueid FROM venue ve WHERE 
-									      ve.popular_choice=" . $choiceId ;
+									      ve.popular_choice=" . $choiceId . "ORDER BY ve.rank";
 			else
 				$query = "SELECT ve.name,ve.address1,ve.address2,ve.content,ve.id,ve.venueid FROM venue ve
 										 WHERE ve.popular_choice!=1 AND ve.popular_choice!=2 AND ve.popular_choice!=3 AND 
