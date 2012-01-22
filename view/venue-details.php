@@ -131,9 +131,12 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
                   <div class="addressLine"><?php echo $venueList[0]->venueAddr1?><br />
                     <?php echo $venueList[0]->venueAddr2?></div>
                 </div>
-                <div class="google-map f-right"> <?php echo $venueList[0]->mapUrl?> <br />
-                  <small></small> </div>
-                <!-- Box Content End -->
+                
+                <div class="google-map f-right">
+                <iframe width='560' height='310' frameborder='0' scrolling='no' marginheight='0' marginwidth='0' src=
+                 	'<?php echo $venueList[0]->mapUrl?>'>
+                 </iframe>
+                  <br /> 
               </div>
             </div>
           </div>
