@@ -234,14 +234,14 @@ class GetYourVenueMySQLManager {
 		} else {
 			if ($choiceId != 0) //TODO (hard code choiceId)
 				$query = "SELECT ve.name,ve.address1,ve.address2,ve.content,ve.id,ve.venueid FROM venue ve WHERE 
-									      ve.popular_choice=" . $choiceId . "ORDER BY ve.rank";
+									      ve.popular_choice=" . $choiceId;
 			else
 				$query = "SELECT ve.name,ve.address1,ve.address2,ve.content,ve.id,ve.venueid FROM venue ve
 										 WHERE ve.popular_choice!=1 AND ve.popular_choice!=2 AND ve.popular_choice!=3 AND 
 										 ve.popular_choice!=4 AND ve.popular_choice!=5";  
 			$result = mysql_query($query);
 			
-			echo $query;
+			//echo $query;
 			while ($row = mysql_fetch_array($result)) {
 
 				$venue = new Venue();
@@ -269,18 +269,18 @@ class GetYourVenueMySQLManager {
 		$venueList = array ();
 
 		$dataBaseResponse = "";
-
 		if (!(mysql_select_db($dbConstants->DATABASE, $connection))) {
 			throw new DBSourceException("Unable to connect to a datasource.");
 		} else {
 			if ($choiceId != 0) //TODO (hard code choiceId)
 				$query = "SELECT ve.name,ve.address1,ve.address2,ve.content,ve.id,ve.venueid FROM venue ve WHERE 
-									      ve.popular_choice=" . $choiceId." limit ".$startIndex.",".$offset ;
+									      ve.popular_choice=" . $choiceId." ORDER BY ve.rank limit ".$startIndex.",".$offset ;
 			else
 				$query = "SELECT ve.name,ve.address1,ve.address2,ve.content,ve.id,ve.venueid FROM venue ve
 										 WHERE ve.popular_choice!=1 AND ve.popular_choice!=2 AND ve.popular_choice!=3 AND 
-										 ve.popular_choice!=4 AND ve.popular_choice!=5 limit ".$startIndex.",".$offset;  
+										 ve.popular_choice!=4 AND ve.popular_choice!=5 ORDER BY ve.rank limit ".$startIndex.",".$offset;  
 			$result = mysql_query($query);
+			//echo $query;
 			while ($row = mysql_fetch_array($result)) {
 
 				$venue = new Venue();
@@ -401,7 +401,7 @@ class GetYourVenueMySQLManager {
 			$fields = "SELECT v.id,v.venueid,v.name,v.address1,v.address2,v.content,v.iframe".",IFNULL(v.alttag,'') as alttag"." ";
 			$entity = "from (SELECT ve.*,vi.alttag FROM"." ". 
 					   "venue ve LEFT JOIN venue_image_alttag vi ON ve.id=vi.venueid) v"." ";
-			$orderBy = "order by v.id desc"." ";
+			$orderBy = "order by v.rank"." ";
 			$conditionClause = "";
 			$isFirstCondition = true;
        		
@@ -437,7 +437,7 @@ class GetYourVenueMySQLManager {
     			$query = $fields.$entity.$conditionClause.$orderBy;
     			$query.=" limit ".$startIndex.",".$offset;
 
-				echo "query===".$query;
+				//echo "query===".$query;
     			
     			return $query;   			
        }//function
