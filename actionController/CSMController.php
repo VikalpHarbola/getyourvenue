@@ -100,6 +100,6 @@ if ($action == "logout") {
 			setcookie("gyvsession", "", 1);
      
      $message = "Successfully Logout";
-     require_once ("../view/loginform.php");
+     require_once ("/view/cms/loginform.php");
 }
 ?>

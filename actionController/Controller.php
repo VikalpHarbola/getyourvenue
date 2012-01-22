@@ -54,7 +54,6 @@ if ($action == "viewChoices") {
 	$venueService = new VenueService();
 	$venueList = $venueService->getVenueByChoice();	
 	$maxPages=ceil(count($venueList)/10);
-	echo "max Page".$maxPages;
 	$venueList = $venueService->getVenueByChoiceForPagination($page);	
 	$categoryName = "";
 	$capacityValue = "";
